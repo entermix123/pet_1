@@ -96,7 +96,7 @@
             <!-- Link to Last Uploaded Pet Photo -->
             <a href="{% url 'details photo' pk=last_pet_photo.pk %}">
                 <!-- Pet Photo -->
-                <img src="/media/{{ last_pet_photo.photo }}"
+                <img src="{{ last_pet_photo.photo.url }}"
                      alt="pet img">
             </a>
             {% endif %}

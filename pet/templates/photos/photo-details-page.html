@@ -69,7 +69,7 @@
                 <div class="imgBx" id="{{ photo.pk }}">
                     <!-- Pet Photo -->
                     # TODO set correct path to photos
-                    <img src="/media/{{ photo.photo }}" alt="photo of the pets {{ photo.tagged_pets.all|join:', ' }}"
+                    <img src="{{ photo.photo.url }}" alt="photo of the pets {{ photo.tagged_pets.all|join:', ' }}"
                          class="cover">
                 </div>
                 <!-- End Pet Photo -->

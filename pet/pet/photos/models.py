@@ -1,3 +1,4 @@
+from cloudinary.models import CloudinaryField
 from django.contrib.auth import get_user_model
 
 from core.model_mixins import StrFromFieldsMixin
@@ -42,12 +43,18 @@ class Photo(StrFromFieldsMixin, models.Model):
 
     # many-to-many relations
 
-    # require media files to work correctly
-    photo = models.ImageField(
-        upload_to='pet_photos/',                # create directory to save uploaded images
-        null=False,                             # save every uploaded image but in DB saves only last one
+    # # require media files to work correctly
+    # photo = models.ImageField(
+    #     upload_to='pet_photos/',                # create directory to save uploaded images
+    #     null=False,                             # save every uploaded image but in DB saves only last one
+    #     blank=True,
+    #     validators=(validate_file_less_than_5mb,),
+    # )
+
+    photo = CloudinaryField(
+        'image',
+        null=False,
         blank=True,
-        validators=(validate_file_less_than_5mb,),
     )
 
     description = models.CharField(

@@ -2,7 +2,8 @@ from django import forms
 
 from core.form_mixins import DisableFormMixin
 from pet.common.models import PhotoLike, PhotoComment
-# TODO
+import cloudinary.uploader
+import cloudinary
 from pet.photos.models import Photo
 
 
@@ -43,5 +44,5 @@ class PhotoDeleteForm(DisableFormMixin, BasePhotoForm):
             PhotoComment.objects.filter(photo_id=self.instance.id).delete()
 
             self.instance.delete()                  # delete the photo
-
+        cloudinary.uploader.destroy(self.instance.photo.public_id, invalidate=True)
         return self.instance

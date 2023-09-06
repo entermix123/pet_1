@@ -14,6 +14,18 @@ from pathlib import Path
 
 from django.urls import reverse_lazy
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+import cloudinary
+
+cloudinary.config(
+    cloud_name="dba9khfa9",
+    api_key="775112477463895",
+    api_secret="1aM1fDOUlSmWEs5iCa1v8WVPzCM"
+)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,17 +33,25 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
-# SECRET_KEY = 'dsfaafas'
+# SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'dsfaafas'
 
-DEBUG = bool(os.environ.get('DEBUG'))
-# DEBUG = True
+print('CHANGES MORE MORE')
+print('CHANGES MORE MORE')
+print('CHANGES MORE MORE')
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(" ")
-# ALLOWED_HOSTS = [
-#     '127.0.0.1',
-#     'localhost',
-# ]
+# DEBUG = bool(os.environ.get('DEBUG'))
+DEBUG = True
+
+# ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(" ")
+
+
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+]
+
+# CSRF_TRUSTED_ORIGINS = [f'https://{ALLOWED_HOSTS}' for x in ALLOWED_HOSTS]
 print(f'ALLOWED_HOSTS={ALLOWED_HOSTS}')
 
 
@@ -66,8 +86,7 @@ ROOT_URLCONF = 'pet.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -86,27 +105,27 @@ WSGI_APPLICATION = 'pet.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": os.environ.get('DB_ENGINE'),
-        "NAME": os.environ.get('DB_NAME'),
-        "USER": os.environ.get('DB_USER'),
-        "PASSWORD": os.environ.get('DB_PASSWORD'),
-        "HOST": os.environ.get('DB_HOST'),
-        "PORT": os.environ.get('DB_PORT'),
-    }
-}
-
 # DATABASES = {
 #     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "pet_db",
-#         "USER": "postgres-user",
-#         "PASSWORD": "password",
-#         "HOST": "127.0.0.1",
-#         "PORT": "5432",
+#         "ENGINE": os.environ.get('DB_ENGINE'),
+#         "NAME": os.environ.get('DB_NAME'),
+#         "USER": os.environ.get('DB_USER'),
+#         "PASSWORD": os.environ.get('DB_PASSWORD'),
+#         "HOST": os.environ.get('DB_HOST'),
+#         "PORT": os.environ.get('DB_PORT'),
 #     }
 # }
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "pet_db",
+        "USER": "postgres-user",
+        "PASSWORD": "password",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
+    }
+}
 
 
 # Password validation
