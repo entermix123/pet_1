@@ -12,6 +12,13 @@ class BasePhotoForm(forms.ModelForm):
         model = Photo
         exclude = ('publication_date', 'user')
 
+        labels = {
+            'photo': 'upload image',
+            'description': 'description',
+            'location': 'location',
+            'tagged_pets': 'tag pets',
+        }
+
 
 class PhotoCreateForm(BasePhotoForm):
     pass
@@ -20,14 +27,19 @@ class PhotoCreateForm(BasePhotoForm):
 class PhotoEditForm(BasePhotoForm):
     class Meta:
         model = Photo
-        exclude = ('publication_date', 'photo')
+        exclude = ('publication_date', 'photo', 'user')
 
 
 class PhotoDeleteForm(DisableFormMixin, BasePhotoForm):
-    disabled_fields = '__all__'
+    class Meta:
+        model = Photo
+        exclude = ('publication_date', 'photo', 'user')
+
+    disabled_fields = ('description', 'location', 'tagged_pets')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self._disable_fields()          # add disabled fields
 
     def save(self, commit=True):        # overwrite save() method when delete photo
 
@@ -44,5 +56,6 @@ class PhotoDeleteForm(DisableFormMixin, BasePhotoForm):
             PhotoComment.objects.filter(photo_id=self.instance.id).delete()
 
             self.instance.delete()                  # delete the photo
+
         cloudinary.uploader.destroy(self.instance.photo.public_id, invalidate=True)
         return self.instance
