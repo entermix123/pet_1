@@ -21,7 +21,7 @@ import cloudinary.api
 import cloudinary
 
 cloudinary.config(
-    cloud_name="cloud_name",
+    cloud_name="your_cloud_name",
     api_key="api_key",
     api_secret="api_secret"
 )
