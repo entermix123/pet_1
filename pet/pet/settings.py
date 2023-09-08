@@ -21,9 +21,9 @@ import cloudinary.api
 import cloudinary
 
 cloudinary.config(
-    cloud_name="dba9khfa9",
-    api_key="775112477463895",
-    api_secret="1aM1fDOUlSmWEs5iCa1v8WVPzCM"
+    cloud_name="cloud_name",
+    api_key="api_key",
+    api_secret="api_secret"
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -48,7 +48,7 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(" ")
 #     'localhost',
 # ]
 
-CSRF_TRUSTED_ORIGINS = [f'https://{ALLOWED_HOSTS}' for x in ALLOWED_HOSTS]
+CSRF_TRUSTED_ORIGINS = [f'https://{x}' for x in ALLOWED_HOSTS]
 print(f'ALLOWED_HOSTS={ALLOWED_HOSTS}')
 
 
